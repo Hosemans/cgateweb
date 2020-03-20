@@ -1,6 +1,22 @@
 cgateweb
 ========
 
+### This fork by MM
+
+This fork has extra functions for C-Bus thermostats.  The HVAC application in C-bus is quite complicated and requires fully formatted messages to be sent.
+You can't just send a 'zone on' command for example.  The command needs to include all the parameters, every time.
+e.g. C-Bus command "aircon set_zone_hvac_mode //HOME/254/172 5 0 1 0 0 0 1 8 4352 0"
+It is essential that you read and understand the C-Gate Air-Conditioning Application User Guide.pdf document from Clipsal.
+
+The problem is formatting the entire C-Bus HVAC command parameters.  This needs to be done via a script from your own system.
+Formatting the parameters is beyond the scope of this fork as it depends on how your home automation system is setup.
+Once the parameters are formatted correctly they can sent to cgateweb via an MQTT payload.  E.g. "5 0 1 0 0 0 1 8 4352 0"
+This fork will then take those parameters and format the entire MQTT topic and paylaod.
+
+This fork will also read incoming C-Bus HVAC messages and format them into MQTT payloads.
+
+
+
 MQTT interface for C-Bus written in Node.js
 
 ### Install:
@@ -50,5 +66,6 @@ Requesting an update on start or periodic updates can be set in the settings fil
  - cbus/write/#1///gettree - result gets published as JSON on cbus/read/#1///tree
 
 ### Other notes:
-I made this for working with OpenHAB
-It assumes the default cgate ports
+I edited the original to work with HomeSeer.
+There are specific notes in the .js scripts.
+It assumes the default cgate ports.
